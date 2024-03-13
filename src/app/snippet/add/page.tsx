@@ -1,9 +1,25 @@
 "use client";
 
+import { useState } from "react";
+
+import { useRouter } from "next/navigation";
+
 import { Button } from "../../../components/button";
 import { Input } from "../../../components/input";
+import { Textarea } from "../../../components/textarea";
+
+interface CodeSnippetProps {
+  title?: string;
+  code?: string;
+}
 
 export default function AddSnippet() {
+  const router = useRouter();
+  const [codeSnippet, setCodeSnippet] = useState<CodeSnippetProps>({});
+
+  const handleOnChange = (item: string) => {
+    console.log(item);
+  };
   return (
     <form className=" border-4 px-3 py-1 sm:px-10 sm:py-3">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm pb-3 sm:pb-8">
@@ -15,20 +31,24 @@ export default function AddSnippet() {
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
-            <Input label={"Title"} placeholderText={"Function"} />
+            <Input
+              label={"Title"}
+              placeholderText={"Function"}
+              onChange={handleOnChange}
+            />
 
             <div className="col-span-full">
               <label className="block text-sm font-medium leading-6 text-gray-900">
-                About
+                Code
               </label>
-              <div className="mt-2">
-                <textarea
-                  id="about"
-                  name="about"
-                  rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                ></textarea>
-              </div>
+              <Textarea
+                rows={3}
+                placeholderText="function handleLogOut() {
+                console.log()
+              }"
+                name={""}
+              />
+
               <p className="mt-3 text-sm leading-6 text-gray-600">
                 {" "}
                 We recommend adding comments in the code for better
@@ -40,6 +60,7 @@ export default function AddSnippet() {
       </div>
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
+          onClick={() => router.push("/")}
           type="button"
           className="text-sm font-semibold leading-6 text-gray-900"
         >
