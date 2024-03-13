@@ -1,3 +1,8 @@
-export const AddSnippet = () => {
-  return <div>page</div>;
-};
+"use client";
+export default function AddSnippet() {
+  return (
+    <form>
+      <div>hello</div>
+    </form>
+  );
+}

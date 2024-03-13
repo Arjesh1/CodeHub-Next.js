@@ -19,7 +19,7 @@ export const Header = () => {
   };
   return (
     <>
-      <header className=" w-full bg-purple-400">
+      <header className=" w-full bg-indigo-300">
         <nav
           className="flex items-center justify-between p-6 lg:px-8"
           aria-label="Global"
