@@ -41,7 +41,10 @@ export default function Home() {
         </div>
       </div>
 
-      <ul role="list" className="divide-y divide-gray-100 border-t-2 mt-12 p-6">
+      <ul
+        role="list"
+        className="divide-y divide-gray-100 border-t-2 mt-5 sm:mt-12 "
+      >
         <SnippetList self={userSnippets} />
       </ul>
     </div>

@@ -7,7 +7,7 @@ interface SnippetListProps {
 
 export const SnippetList = ({ self }: SnippetListProps) => {
   return (
-    <li className="flex justify-between gap-x-6 py-5">
+    <li className="flex-col mt-3 sm:flex sm:flex-row sm:justify-between gap-4 sm:py-5 ">
       <div className="flex min-w-0 gap-x-4 items-center">
         <img
           className="h-12 w-12 flex-none rounded-full bg-gray-50"
@@ -21,7 +21,7 @@ export const SnippetList = ({ self }: SnippetListProps) => {
         </div>
       </div>
       {self ? (
-        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end ">
+        <div className=" shrink-0 sm:flex sm:flex-col sm:items-end py-3 sm:py-0 ">
           <Button
             buttonText={"Edit"}
             onClick={() => console.log("edit pressed")}
@@ -31,7 +31,7 @@ export const SnippetList = ({ self }: SnippetListProps) => {
           </p>
         </div>
       ) : (
-        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+        <div className=" shrink-0 sm:flex sm:flex-col sm:items-end  py-3 sm:py-0">
           <p className="text-sm leading-6 text-gray-900">Leslie Alexander</p>
           <p className="mt-1 text-xs leading-5 text-gray-500">
             Posted on {new Date(Date.now()).toLocaleString()}
