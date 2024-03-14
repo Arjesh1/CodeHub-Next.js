@@ -8,6 +8,7 @@ import { Button } from "../../../components/button";
 import { Input } from "../../../components/input";
 import { Textarea } from "../../../components/textarea";
 import { ToggleButton } from "../../../components/toggleButton";
+import { toast } from "react-toastify";
 
 interface CodeSnippetProps {
   title?: string;
@@ -17,14 +18,20 @@ interface CodeSnippetProps {
 
 export default function AddSnippet() {
   const router = useRouter();
-  const [codeSnippet, setCodeSnippet] = useState<CodeSnippetProps>({});
-  console.log(codeSnippet);
+  const [codeSnippet, setCodeSnippet] = useState<CodeSnippetProps>({isPrivate: false});
 
   const handleOnChange = (name: string, value: string | boolean) => {
     setCodeSnippet((previous) => ({ ...previous, [name]: value }));
   };
+
+  const handleOnAddSnippets= (e: { preventDefault: () => void; })=>{
+    e.preventDefault()
+    toast.success('Added')
+    console.log(codeSnippet)
+
+  }
   return (
-    <form className=" border-4 px-3 py-1 sm:px-10 sm:py-3">
+    <form className=" border-4 px-3 py-1 sm:px-10 sm:py-3" onSubmit={handleOnAddSnippets}>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm pb-3 sm:pb-8">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Add code snippets
@@ -74,7 +81,7 @@ export default function AddSnippet() {
         >
           Cancel
         </button>
-        <Button buttonText={"Add"} onClick={() => console.log("add pressed")} />
+        <Button buttonText={"Add"}/>
       </div>
     </form>
   );
