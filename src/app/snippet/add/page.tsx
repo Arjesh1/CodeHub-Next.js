@@ -7,18 +7,21 @@ import { useRouter } from "next/navigation";
 import { Button } from "../../../components/button";
 import { Input } from "../../../components/input";
 import { Textarea } from "../../../components/textarea";
+import { ToggleButton } from "../../../components/toggleButton";
 
 interface CodeSnippetProps {
   title?: string;
   code?: string;
+  isPrivate?: boolean;
 }
 
 export default function AddSnippet() {
   const router = useRouter();
   const [codeSnippet, setCodeSnippet] = useState<CodeSnippetProps>({});
+  console.log(codeSnippet);
 
-  const handleOnChange = (item: string) => {
-    console.log(item);
+  const handleOnChange = (name: string, value: string | boolean) => {
+    setCodeSnippet((previous) => ({ ...previous, [name]: value }));
   };
   return (
     <form className=" border-4 px-3 py-1 sm:px-10 sm:py-3">
@@ -31,10 +34,16 @@ export default function AddSnippet() {
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
+            <ToggleButton
+              label="Private"
+              name={"isPrivate"}
+              onChange={handleOnChange}
+            />
             <Input
               label={"Title"}
               placeholderText={"Function"}
               onChange={handleOnChange}
+              name="title"
             />
 
             <div className="col-span-full">
@@ -43,10 +52,9 @@ export default function AddSnippet() {
               </label>
               <Textarea
                 rows={3}
-                placeholderText="function handleLogOut() {
-                console.log()
-              }"
-                name={""}
+                placeholderText="function handleLogOut() {console.log()}"
+                name={"code"}
+                onChange={handleOnChange}
               />
 
               <p className="mt-3 text-sm leading-6 text-gray-600">
