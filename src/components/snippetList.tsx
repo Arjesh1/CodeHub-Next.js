@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { Button } from "./button";
 
@@ -25,13 +24,10 @@ export const SnippetList = ({ self, title, id }: SnippetListProps) => {
       </div>
       {self ? (
         <div className=" shrink-0 sm:flex sm:flex-col sm:items-end py-3 sm:py-0 ">
-          <Link href={`snippet/${id }`}>
-          <Button
-            buttonText={"Edit"}
-            type={"submit"}
-          />
+          <Link href={`snippet/${id}`}>
+            <Button buttonText={"Edit"} type={"submit"} />
           </Link>
-          
+
           <p className="mt-1 text-xs leading-5 text-gray-500">
             Posted on {new Date(Date.now()).toLocaleString()}
           </p>

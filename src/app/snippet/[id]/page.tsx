@@ -1,16 +1,23 @@
-import { db } from '../../../db'
+import { notFound } from "next/navigation";
+
+import { db } from "../../../db";
 
 interface SnippetShowPageProps {
-    params: {
-        id: string
-    }
-    searchParams : {}
+  params: {
+    id: string;
+  };
+  searchParams: {};
 }
 
 export default async function SnippetShowPage(props: SnippetShowPageProps) {
-    const snippet = await db.snippet.findFirst({where:{id: +props.params.id}})
-    console.log(snippet)
-    
-    return <div className="">show a snippet</div>
-    
+  const snippet = await db.snippet.findFirst({
+    where: { id: +props.params.id },
+  });
+  console.log(snippet);
+
+  if (!snippet) {
+    return notFound();
+  }
+
+  return <div className="">{snippet.title}</div>;
 }
