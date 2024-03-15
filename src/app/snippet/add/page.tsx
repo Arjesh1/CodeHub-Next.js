@@ -1,37 +1,31 @@
-"use client";
-
-import { useState } from "react";
-
-import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { redirect } from "next/navigation";
 
 import { Button } from "../../../components/button";
 import { Input } from "../../../components/input";
 import { Textarea } from "../../../components/textarea";
 import { ToggleButton } from "../../../components/toggleButton";
-import { toast } from "react-toastify";
+import { db } from '../../../db'
 
-interface CodeSnippetProps {
-  title?: string;
-  code?: string;
-  isPrivate?: boolean;
-}
+export default async function AddSnippet() {
 
-export default function AddSnippet() {
-  const router = useRouter();
-  const [codeSnippet, setCodeSnippet] = useState<CodeSnippetProps>({isPrivate: false});
-
-  const handleOnChange = (name: string, value: string | boolean) => {
-    setCodeSnippet((previous) => ({ ...previous, [name]: value }));
-  };
-
-  const handleOnAddSnippets= (e: { preventDefault: () => void; })=>{
-    e.preventDefault()
-    toast.success('Added')
-    console.log(codeSnippet)
-
+  const handleOnAddSnippets = async (formData: FormData)=>{
+    'use server'
+    const title = formData.get('title') as string
+    const code = formData.get('code') as string
+    const isPrivate = typeof(formData.get('isPrivate')=== 'string')? true : false
+    const snippet = await db.snippet.create({
+      data:{
+        title,
+        code,
+        // isPrivate
+      }
+    })
+    console.log(snippet)
+    redirect('/')
   }
   return (
-    <form className=" border-4 px-3 py-1 sm:px-10 sm:py-3" onSubmit={handleOnAddSnippets}>
+    <form className=" border-4 px-3 py-1 sm:px-10 sm:py-3" action={handleOnAddSnippets}>
       <div className="sm:mx-auto sm:w-full sm:max-w-sm pb-3 sm:pb-8">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Add code snippets
@@ -43,13 +37,11 @@ export default function AddSnippet() {
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
             <ToggleButton
               label="Private"
-              name={"isPrivate"}
-              onChange={handleOnChange}
+              name="isPrivate"
             />
             <Input
               label={"Title"}
               placeholderText={"Function"}
-              onChange={handleOnChange}
               name="title"
             />
 
@@ -61,7 +53,6 @@ export default function AddSnippet() {
                 rows={3}
                 placeholderText="function handleLogOut() {console.log()}"
                 name={"code"}
-                onChange={handleOnChange}
               />
 
               <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -74,14 +65,10 @@ export default function AddSnippet() {
         </div>
       </div>
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button
-          onClick={() => router.push("/")}
-          type="button"
-          className="text-sm font-semibold leading-6 text-gray-900"
-        >
-          Cancel
-        </button>
-        <Button buttonText={"Add"}/>
+      <Link href={'/'}>
+      <Button buttonText={"Cancel"} type='cancel'/>
+      </Link>
+      <Button buttonText={"Add"} type='submit'/>
       </div>
     </form>
   );

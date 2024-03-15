@@ -1,15 +1,12 @@
-"use client";
-
-import { useState } from "react";
-
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 import { SnippetList } from "../components/snippetList";
 import { Button } from "../components/button";
+import { db } from "../db";
 
-export default function Home() {
-  const [userSnippets, setUserSnippets] = useState<boolean>(true);
-  const router = useRouter();
+export default async function Home() {
+  const snipppets = await db.snippet.findMany()
+  console.log(snipppets)
 
   return (
     <div>
@@ -20,23 +17,27 @@ export default function Home() {
           </h1>
         </div>
         <div className="col-span-full md:col-span-1 mt-4 md:mt-0 ">
+          <Link href={'snippet/add'}>
           <Button
             buttonText={"+ Add"}
-            onClick={() => router.push("/snippet/add")}
+            type='submit'
           />
+          </Link>
+
         </div>
       </div>
 
       <div className=" flex flex-row gap-3">
         <div className="basis-1/2">
           {" "}
-          <Button buttonText={"Me"} onClick={() => setUserSnippets(true)} />
+          <Button buttonText={"Me"} 
+          type='submit' />
         </div>
         <div className="basis-1/2">
           {" "}
           <Button
             buttonText={"Explore"}
-            onClick={() => setUserSnippets(false)}
+            type='submit'
           />
         </div>
       </div>
@@ -45,7 +46,10 @@ export default function Home() {
         role="list"
         className="divide-y divide-gray-100 border-t-2 mt-5 sm:mt-12 "
       >
-        <SnippetList self={userSnippets} />
+        {snipppets.map((snippet) => (
+           <SnippetList self={true} key={snippet.id} title={snippet.title}  code={snippet.code}/>
+        ))}
+       
       </ul>
     </div>
   );

@@ -1,14 +1,13 @@
 interface ButtonProps {
   buttonText: string;
-  onClick?: () => void;
+  type: 'cancel' | 'submit'
 }
 
-export const Button = ({ buttonText, onClick }: ButtonProps) => {
+export const Button = ({ buttonText,type}: ButtonProps) => {
   return (
     <div>
       <button
-        onClick={onClick}
-        className="rounded-md w-full bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 styles"
+        className={`rounded-md w-full  px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm  focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2  styles ${type === 'submit'?'bg-indigo-600 focus-visible:outline-indigo-600 hover:bg-indigo-500' : 'bg-slate-600 focus-visible:outline-slate-600 hover:bg-slate-500'}`}
       >
         {buttonText}
       </button>
