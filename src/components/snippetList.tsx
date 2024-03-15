@@ -1,11 +1,10 @@
 import Image from "next/image";
 import { Button } from "./button";
 
-
 interface SnippetListProps {
   self: boolean;
   title: string;
-  code:  string;
+  code: string;
 }
 
 export const SnippetList = ({ self, title, code }: SnippetListProps) => {
@@ -26,7 +25,8 @@ export const SnippetList = ({ self, title, code }: SnippetListProps) => {
       {self ? (
         <div className=" shrink-0 sm:flex sm:flex-col sm:items-end py-3 sm:py-0 ">
           <Button
-            buttonText={"Edit"} type={"submit"}            // onClick={() => console.log("edit pressed")}
+            buttonText={"Edit"}
+            type={"submit"} // onClick={() => console.log("edit pressed")}
           />
           <p className="mt-1 text-xs leading-5 text-gray-500">
             Posted on {new Date(Date.now()).toLocaleString()}

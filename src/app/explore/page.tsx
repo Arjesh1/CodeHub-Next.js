@@ -1,9 +1,9 @@
-import { SnippetList } from "../components/snippetList";
-import { db } from "../db";
-import { Hero } from "../components/hero";
+import { SnippetList } from "../../components/snippetList";
+import { db } from "../../db";
+import { Hero } from "../../components/hero";
 
 export default async function Home() {
-  const snipppets = await db.snippet.findMany({ where: { isPrivate: true } });
+  const snipppets = await db.snippet.findMany({ where: { isPrivate: false } });
 
   return (
     <div>
