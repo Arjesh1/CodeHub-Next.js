@@ -14,10 +14,10 @@ export default async function Home() {
       >
         {snipppets.map((snippet) => (
           <SnippetList
-            self={true}
+            self={false}
             key={snippet.id}
             title={snippet.title}
-            code={snippet.code}
+            id={snippet.id}
           />
         ))}
       </ul>

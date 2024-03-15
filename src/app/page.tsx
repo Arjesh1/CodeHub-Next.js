@@ -17,7 +17,7 @@ export default async function Home() {
             self={true}
             key={snippet.id}
             title={snippet.title}
-            code={snippet.code}
+            id={snippet.id}
           />
         ))}
       </ul>

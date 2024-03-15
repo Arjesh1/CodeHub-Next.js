@@ -1,13 +1,14 @@
-import Image from "next/image";
+
+import Link from "next/link";
 import { Button } from "./button";
 
 interface SnippetListProps {
   self: boolean;
   title: string;
-  code: string;
+  id: number;
 }
 
-export const SnippetList = ({ self, title, code }: SnippetListProps) => {
+export const SnippetList = ({ self, title, id }: SnippetListProps) => {
   return (
     <li className="flex-col mt-3 sm:flex sm:flex-row sm:justify-between gap-4 sm:py-5 ">
       <div className="flex min-w-0 gap-x-4 items-center">
@@ -24,10 +25,13 @@ export const SnippetList = ({ self, title, code }: SnippetListProps) => {
       </div>
       {self ? (
         <div className=" shrink-0 sm:flex sm:flex-col sm:items-end py-3 sm:py-0 ">
+          <Link href={`snippet/${id }`}>
           <Button
             buttonText={"Edit"}
-            type={"submit"} // onClick={() => console.log("edit pressed")}
+            type={"submit"}
           />
+          </Link>
+          
           <p className="mt-1 text-xs leading-5 text-gray-500">
             Posted on {new Date(Date.now()).toLocaleString()}
           </p>
