@@ -1,7 +1,13 @@
+'use client'
 
+import type {Snippet} from '@prisma/client'
 
-export const SnippetEditForm = () => {
+interface SnippetEditFormProps {
+    snippet: Snippet
+}
+
+export function SnippetEditForm ({snippet}: SnippetEditFormProps) {
   return (
-    <div>snippetEditForm</div>
+    <div>snippetEditForm client component with title {snippet.title}</div>
   )
 }
