@@ -27,7 +27,7 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
   return (
     <div className="shadow-xl p-4 rounded-md border-b border-gray-900/10">
       <div className=" grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 ">
-        <ToggleButton label="Private" name="isPrivate" />
+        <ToggleButton label="Private" name="isPrivate" checked={snippet.isPrivate} />
         <Input label={"Title"} placeholderText={"Function"} name="title" value ={snippet.title}/>
 
         <div className="col-span-full">
