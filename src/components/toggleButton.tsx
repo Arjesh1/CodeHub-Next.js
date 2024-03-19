@@ -1,10 +1,12 @@
 interface ToggleButtonProps {
   label: string;
   name: string;
+  props?: any;
   onChange?: (name: string, value: boolean) => void;
 }
 
-export const ToggleButton = ({ label, onChange, name }: ToggleButtonProps) => {
+export const ToggleButton = ({ label, onChange, name, props }: ToggleButtonProps) => {
+  
   return (
     <label className=" me-5 cursor-pointer">
       <span className=" block text-sm font-medium leading-6 text-gray-900">

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 import Editor from "@monaco-editor/react";
@@ -14,6 +14,12 @@ interface SnippetEditFormProps {
 }
 
 export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
+  const [snippetData, setSnippetData] = useState<Snippet | null>()
+  useEffect(()=>{
+    setSnippetData(snippet)
+
+  }, [snippet, snippetData])
+
   function handleEditorChange(value: any, event: any) {
     console.log("here is the current model value:", value);
   }
@@ -22,7 +28,7 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
     <div className="shadow-xl p-4 rounded-md border-b border-gray-900/10">
       <div className=" grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 ">
         <ToggleButton label="Private" name="isPrivate" />
-        <Input label={"Title"} placeholderText={"Function"} name="title" />
+        <Input label={"Title"} placeholderText={"Function"} name="title" value ={snippet.title}/>
 
         <div className="col-span-full">
           <label className="block text-sm font-medium leading-6 text-gray-900">

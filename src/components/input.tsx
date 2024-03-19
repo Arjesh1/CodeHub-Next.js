@@ -2,6 +2,7 @@ interface InputProps {
   label: string;
   name: string;
   placeholderText: string;
+  value?: string;
   onChange?: (name: string, value: string) => void;
 }
 export const Input = ({
@@ -9,6 +10,7 @@ export const Input = ({
   name,
   placeholderText,
   onChange,
+  value
 }: InputProps) => {
   return (
     <div className="col-span-full">
@@ -23,6 +25,7 @@ export const Input = ({
             name={name}
             className="block flex-1 border-0 bg-transparent p-2 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
             placeholder={placeholderText}
+            value={value}
             // onChange={(e) => onChange(name, e.target.value)}
             required
           />
