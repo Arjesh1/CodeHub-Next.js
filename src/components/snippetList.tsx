@@ -22,15 +22,15 @@ export const SnippetList = ({ self, title, id }: SnippetListProps) => {
           </p>
         </div>
       </div>
-        <div className=" shrink-0 sm:flex sm:flex-col sm:items-end py-3 sm:py-0 ">
-          <Link href={`snippet/${id}`}>
-            <Button buttonText={"View"} type={"submit"} />
-          </Link>
+      <div className=" shrink-0 sm:flex sm:flex-col sm:items-end py-3 sm:py-0 ">
+        <Link href={`snippet/${id}`}>
+          <Button buttonText={"View"} type={"submit"} />
+        </Link>
 
-          <p className="mt-1 text-xs leading-5 text-gray-500">
-            Posted on {new Date(Date.now()).toLocaleString()}
-          </p>
-        </div>
+        <p className="mt-1 text-xs leading-5 text-gray-500">
+          Posted on {new Date(Date.now()).toLocaleString()}
+        </p>
+      </div>
     </li>
   );
 };

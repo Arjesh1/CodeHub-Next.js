@@ -19,36 +19,30 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
   }
 
   return (
-    <>
+    <div className="shadow-xl p-4 rounded-md border-b border-gray-900/10">
+      <div className=" grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-6 ">
+        <ToggleButton label="Private" name="isPrivate" />
+        <Input label={"Title"} placeholderText={"Function"} name="title" />
 
-<div className="space-y-12">
-        <div className="border-b border-gray-900/10 pb-12">
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 ">
-            <ToggleButton label="Private" name="isPrivate" />
-            <Input label={"Title"} placeholderText={"Function"} name="title" />
+        <div className="col-span-full">
+          <label className="block text-sm font-medium leading-6 text-gray-900">
+            Code
+          </label>
+          <Editor
+            height="40vh"
+            defaultLanguage="javascript"
+            defaultValue={snippet.code}
+            onChange={handleEditorChange}
+            theme="vs-dark"
+          />
 
-            <div className="col-span-full">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Code
-              </label>
-              <Editor
-        height="60vh"
-        defaultLanguage="javascript"
-        defaultValue={snippet.code}
-        onChange={handleEditorChange}
-        theme="vs-dark"
-      />
-
-              <p className="mt-3 text-sm leading-6 text-gray-600">
-                {" "}
-                We recommend adding comments in the code for better
-                understanding in the future.
-              </p>
-            </div>
-          </div>
+          <p className="mt-3 text-sm leading-6 text-gray-600">
+            {" "}
+            We recommend adding comments in the code for better understanding in
+            the future.
+          </p>
         </div>
       </div>
-      
-    </>
+    </div>
   );
 }
