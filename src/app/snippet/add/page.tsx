@@ -29,10 +29,12 @@ export default function AddSnippet() {
     setSnippetData((previous) => ({ ...previous, [name]: value }));
   };
 
-  const handleOnAddSnippets = async (e: { preventDefault: () => void }) => {
+  const handleOnAddSnippets = async (
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
     e.preventDefault();
-    const response = await addSnippet(snippetData);
     setSnippetData(initialSnippetData);
+    await addSnippet(snippetData);
   };
 
   return (

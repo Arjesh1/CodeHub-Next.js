@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import Editor from "@monaco-editor/react";
 
@@ -7,24 +7,27 @@ import type { Snippet } from "@prisma/client";
 
 import { ToggleButton } from "./toggleButton";
 import { Input } from "./input";
-import editSnippet from "../actions";
+import { editSnippet } from "@/actions";
+import Link from "next/link";
+import { Button } from "./button";
 
 interface SnippetEditFormProps {
   snippet: Snippet;
 }
 
 export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
-  const [snippetData, setSnippetData] = useState<Snippet>({});
-  useEffect(() => {
-    setSnippetData(snippet);
-  }, [snippet, snippetData]);
+  const [snippetData, setSnippetData] = useState<Snippet>(snippet);
 
-  function handleEditorChange(value: any, event: any) {
-    console.log("here is the current model value:", value);
-  }
+  const handleOnDataChange = (
+    name: string,
+    value: string | boolean | undefined,
+  ) => {
+    setSnippetData((previous) => ({ ...previous, [name]: value }));
+  };
 
-  function handleSubmit() {
-    editSnippet(snippetData);
+  async function handleEditSubmit() {
+    console.log(snippetData);
+    await editSnippet(snippetData);
   }
 
   return (
@@ -33,13 +36,15 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
         <ToggleButton
           label="Private"
           name="isPrivate"
-          checked={snippetData.isPrivate}
+          checked={snippetData ? snippetData.isPrivate : snippet.isPrivate}
+          onChange={handleOnDataChange}
         />
         <Input
           label={"Title"}
           placeholderText={"Function"}
           name="title"
-          value={snippetData.title}
+          value={snippetData ? snippetData.title : snippet.title}
+          onChange={handleOnDataChange}
         />
 
         <div className="col-span-full">
@@ -49,8 +54,8 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
           <Editor
             height="40vh"
             defaultLanguage="javascript"
-            defaultValue={snippetData.code}
-            onChange={handleEditorChange}
+            defaultValue={snippetData ? snippetData.code : snippet.code}
+            onChange={(value) => handleOnDataChange("code", value)}
             theme="vs-dark"
             options={{ minimap: { enabled: false } }}
           />
@@ -61,7 +66,17 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
             the future.
           </p>
         </div>
-        <button onClick={handleSubmit}>submit</button>
+
+        <div className="flex col-span-full items-end justify-end  gap-x-6">
+          <Link href={`/snippet/${snippet.id}`}>
+            <Button buttonText={"Cancel"} type="cancel" />
+          </Link>
+          <Button
+            buttonText={"Edit"}
+            type="submit"
+            onClick={handleEditSubmit}
+          />
+        </div>
       </div>
     </div>
   );

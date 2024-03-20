@@ -12,19 +12,62 @@ interface AddSnippetProps {
 }
 
 export async function addSnippet(snippetData: AddSnippetProps) {
-  const response = await db.snippet.create({
+  // Validate snippetData
+  if (!snippetData.title || !snippetData.code) {
+    throw new Error("Title and code are required.");
+  }
+
+  // Insert the snippet into the database
+  const newSnippet = await db.snippet.create({
     data: {
       ...snippetData,
     },
   });
-  return response;
+
+  redirect(`/`);
 }
 
 export async function editSnippet(editedData: Snippet) {
-  console.log(
-    "edit snipped called",
-    editedData.id,
-    editedData.title,
-    editedData.code,
-  );
+  const { id, title, code, isPrivate } = editedData;
+  await db.snippet.update({
+    where: { id },
+    data: { title, code, isPrivate },
+  });
+  redirect(`/snippet/${id}`);
+}
+
+export async function getSelectedSnippet(id: number) {
+  if (!id) {
+    throw new Error("Id is  required.");
+  }
+
+  // get the selected snippet from the database
+  const selectedSnippet = await db.snippet.findFirst({
+    where: { id },
+  });
+
+  console.log(selectedSnippet);
+
+  return selectedSnippet;
+}
+
+export async function deleteSnippet(id: number) {
+  try {
+    if (!id) {
+      throw new Error("Id is  required.");
+    }
+
+    // Insert the snippet into the database
+    const deleteSnippet = await db.snippet.delete({
+      where: {
+        id,
+      },
+    });
+
+    return deleteSnippet;
+  } catch (error) {
+    // Handle errors
+    console.error("Error deleting snippet:", error);
+    throw new Error("Failed to delete snippet.");
+  }
 }

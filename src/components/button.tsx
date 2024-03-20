@@ -1,7 +1,7 @@
 interface ButtonProps {
   buttonText: string;
   type: "cancel" | "submit" | "delete";
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => {};
 }
 
 export const Button = ({ buttonText, type, onClick }: ButtonProps) => {
