@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "npx prettier --write ./src",
+    "prettier": "npx prettier --write ./src ./__tests__",
     "test": "jest",
     "test:watch": "jest --watch"
   },

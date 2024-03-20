@@ -2,7 +2,7 @@ import { SnippetList } from "../components/snippetList";
 import { db } from "../db";
 import { Hero } from "../components/hero";
 
-export const dynamic = 'force-dynamic'
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const snipppets = await db.snippet.findMany({ where: { isPrivate: true } });
