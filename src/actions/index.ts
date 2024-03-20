@@ -52,22 +52,15 @@ export async function getSelectedSnippet(id: number) {
 }
 
 export async function deleteSnippet(id: number) {
-  try {
-    if (!id) {
-      throw new Error("Id is  required.");
-    }
-
-    // Insert the snippet into the database
-    const deleteSnippet = await db.snippet.delete({
-      where: {
-        id,
-      },
-    });
-
-    return deleteSnippet;
-  } catch (error) {
-    // Handle errors
-    console.error("Error deleting snippet:", error);
-    throw new Error("Failed to delete snippet.");
+  if (!id) {
+    throw new Error("Id is  required.");
   }
+
+  // Delete the snippet into the database
+  await db.snippet.delete({
+    where: {
+      id,
+    },
+  });
+  redirect(`/`);
 }
