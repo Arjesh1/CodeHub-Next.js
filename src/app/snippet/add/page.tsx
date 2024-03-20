@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import Link from "next/link";
 
+import { toast } from "react-toastify";
+
 import { Button } from "../../../components/button";
 import { Input } from "../../../components/input";
 import { Textarea } from "../../../components/textarea";
@@ -33,8 +35,11 @@ export default function AddSnippet() {
     e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault();
+    const response = await addSnippet(snippetData);
+    if (response) {
+      return toast.error(response.message);
+    }
     setSnippetData(initialSnippetData);
-    await addSnippet(snippetData);
   };
 
   return (

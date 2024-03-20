@@ -10,6 +10,7 @@ import { Input } from "./input";
 import { editSnippet } from "@/actions";
 import Link from "next/link";
 import { Button } from "./button";
+import { toast } from "react-toastify";
 
 interface SnippetEditFormProps {
   snippet: Snippet;
@@ -26,8 +27,10 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
   };
 
   async function handleEditSubmit() {
-    console.log(snippetData);
-    await editSnippet(snippetData);
+    const editResponse = await editSnippet(snippetData);
+    if (editResponse) {
+      return toast.error(editResponse.message);
+    }
   }
 
   return (
