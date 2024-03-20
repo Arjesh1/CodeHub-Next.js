@@ -20,7 +20,25 @@ describe('Toggle Button Component', ()=>{
         expect(inputElement).toBeInTheDocument();
         expect(inputElement.checked).toBe(false);
       });
+      
+      it('checks if the checked is true when user clicks on it', () => {
+        const { getByLabelText } = render(<ToggleButton {...defaultProps} />);
+    const inputElement = getByLabelText(defaultProps.label)
 
+    fireEvent.click(inputElement);
+
+    expect(defaultProps.onChange).toHaveBeenCalledWith(
+      defaultProps.name,
+      true
+    );
+
+    fireEvent.click(inputElement);
+
+    expect(defaultProps.onChange).toHaveBeenCalledWith(
+      defaultProps.name,
+      false
+    )
+      })
 })
 
 
