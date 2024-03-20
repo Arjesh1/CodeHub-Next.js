@@ -14,7 +14,7 @@ describe("Toggle Button Component", () => {
       <ToggleButton {...defaultProps} />,
     );
     const labelElement = getByText(defaultProps.label);
-    const inputElement = getByLabelText(defaultProps.label);
+    const inputElement = getByLabelText(defaultProps.label) as HTMLInputElement;
 
     expect(labelElement).toBeInTheDocument();
     expect(inputElement).toBeInTheDocument();

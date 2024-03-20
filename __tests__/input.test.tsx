@@ -26,7 +26,9 @@ describe("Input component", () => {
   it("renders the correct value prop passed", () => {
     const { getByDisplayValue } = render(<Input {...defaultProps} />);
 
-    const inputValueElement = getByDisplayValue(defaultProps.value);
+    const inputValueElement = getByDisplayValue(
+      defaultProps.value,
+    ) as HTMLInputElement;
     expect(inputValueElement).toBeInTheDocument();
   });
 });

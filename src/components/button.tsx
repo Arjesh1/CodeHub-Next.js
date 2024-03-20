@@ -1,6 +1,6 @@
 interface ButtonProps {
   buttonText: string;
-  type: "cancel" | "submit" | "delete";
+  type: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => {};
 }
 
