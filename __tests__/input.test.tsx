@@ -3,32 +3,33 @@ import { Input } from "../src/components/input";
 
 describe("Input component", () => {
   const defaultProps = {
-    label: "Test label",
-    name: "Test label",
-    placeholderText: "Test label",
+    label: "Input label",
+    name: "InputName",
+    placeholderText: "Input Placeholder",
     onChange: jest.fn(),
-    value: "Test value",
+    value: "",
   };
 
   it("renders with correct label and placeholder", () => {
-    const { getByPlaceholderText, getByText } = render(
-      <Input {...defaultProps} />,
-    );
-    const labelElement = getByText(defaultProps.label);
-    const placeholderElement = getByPlaceholderText(
-      defaultProps.placeholderText,
-    );
+    const { getByLabelText } = render(<Input {...defaultProps} />);
+    const labelElement = getByLabelText(defaultProps.label) as HTMLLabelElement;
+    const inputElement = getByLabelText(defaultProps.label) as HTMLInputElement;
 
     expect(labelElement).toBeInTheDocument();
-    expect(placeholderElement).toBeInTheDocument();
+    expect(inputElement).toBeInTheDocument();
+    expect(inputElement.placeholder).toBe(defaultProps.placeholderText);
+    expect(inputElement.value).toBe(defaultProps.value);
   });
 
-  it("renders the correct value prop passed", () => {
-    const { getByDisplayValue } = render(<Input {...defaultProps} />);
+  it("calls onChange handler with correct arguments when input value changes", () => {
+    const { getByLabelText } = render(<Input {...defaultProps} />);
+    const inputElement = getByLabelText(defaultProps.label) as HTMLInputElement;
 
-    const inputValueElement = getByDisplayValue(
-      defaultProps.value,
-    ) as HTMLInputElement;
-    expect(inputValueElement).toBeInTheDocument();
+    fireEvent.change(inputElement, { target: { value: "New Value" } });
+
+    expect(defaultProps.onChange).toHaveBeenCalledWith(
+      defaultProps.name,
+      "New Value",
+    );
   });
 });
