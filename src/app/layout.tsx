@@ -17,10 +17,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userData = {
+    uid: 12122,
+  };
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Header />
+        <Header userData={userData} />
         <div className="p-4 md:p-8">{children}</div>
         <ToastContainer />
       </body>

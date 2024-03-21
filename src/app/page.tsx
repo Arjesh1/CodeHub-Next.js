@@ -15,12 +15,7 @@ export default async function Home() {
         className="divide-y divide-gray-100 border-t-2 mt-5 sm:mt-12 "
       >
         {snipppets.map((snippet) => (
-          <SnippetList
-            self={true}
-            key={snippet.id}
-            title={snippet.title}
-            id={snippet.id}
-          />
+          <SnippetList key={snippet.id} title={snippet.title} id={snippet.id} />
         ))}
       </ul>
     </div>

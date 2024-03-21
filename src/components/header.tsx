@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { FaUserAlt, FaUserCircle } from "react-icons/fa";
 
@@ -9,14 +9,20 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
-export const Header = () => {
-  const user = {
-    uid: "12122",
+interface HeaderProps {
+  userData?: {
+    uid?: number;
   };
+}
+
+export const Header = ({ userData }: HeaderProps) => {
+  const [user, setUser] = useState(userData);
 
   const handleOnLogOut = () => {
+    setUser({});
     console.log("logout succesful");
   };
+
   return (
     <>
       <header className=" w-full bg-indigo-300">
@@ -40,7 +46,7 @@ export const Header = () => {
                     <span className="  text-lg">
                       <FaUserAlt />
                     </span>
-                    <p className="  hidden sm:block "> Login</p>
+                    <p className="  hidden sm:block ">Login</p>
                   </div>
                 </Link>
               </>

@@ -2,12 +2,11 @@ import Link from "next/link";
 import { Button } from "./button";
 
 interface SnippetListProps {
-  self: boolean;
   title: string;
   id: number;
 }
 
-export const SnippetList = ({ self, title, id }: SnippetListProps) => {
+export const SnippetList = ({ title, id }: SnippetListProps) => {
   return (
     <li className="flex-col mt-3 sm:flex sm:flex-row sm:justify-between gap-4 sm:py-5 ">
       <div className="flex min-w-0 gap-x-4 items-center">
