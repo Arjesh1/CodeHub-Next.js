@@ -20,7 +20,6 @@ export const Header = ({ userData }: HeaderProps) => {
 
   const handleOnLogOut = () => {
     setUser({});
-    console.log("logout succesful");
   };
 
   return (
