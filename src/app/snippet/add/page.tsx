@@ -66,14 +66,12 @@ export default function AddSnippet() {
             />
 
             <div className="col-span-full">
-              <label className="block text-sm font-medium leading-6 text-gray-900">
-                Code
-              </label>
               <Textarea
                 rows={3}
                 placeholderText="function handleLogOut() {console.log()}"
                 name={"code"}
                 onChange={handleOnDataChange}
+                label="Code"
               />
 
               <p className="mt-3 text-sm leading-6 text-gray-600">
