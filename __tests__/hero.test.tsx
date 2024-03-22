@@ -1,9 +1,4 @@
-import {
-  screen,
-  render,
-  fireEvent,
-  getAllByRole,
-} from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import { Hero } from "../src/components/hero";
 
 describe("Hero component", () => {

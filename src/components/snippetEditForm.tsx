@@ -12,11 +12,7 @@ import Link from "next/link";
 import { Button } from "./button";
 import { toast } from "react-toastify";
 
-interface SnippetEditFormProps {
-  snippet: Snippet;
-}
-
-export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
+export function SnippetEditForm(snippet: Snippet) {
   const [snippetData, setSnippetData] = useState<Snippet>(snippet);
 
   const handleOnDataChange = (
@@ -51,7 +47,10 @@ export function SnippetEditForm({ snippet }: SnippetEditFormProps) {
         />
 
         <div className="col-span-full">
-          <label className="block text-sm font-medium leading-6 text-gray-900">
+          <label
+            className="block text-sm font-medium leading-6 text-gray-900"
+            htmlFor="CodeEditor"
+          >
             Code
           </label>
           <Editor
