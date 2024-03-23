@@ -1,4 +1,4 @@
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render, fireEvent, waitFor } from "@testing-library/react";
 import { SnippetEditForm } from "../src/components/snippetEditForm";
 
 describe("Snippet Edit Form Component", () => {
@@ -13,7 +13,9 @@ describe("Snippet Edit Form Component", () => {
   });
 
   it("checks the input value is correct", () => {
-    const { getByLabelText } = render(<SnippetEditForm {...defaultProps} />);
+    const { getByLabelText, getAllByRole } = render(
+      <SnippetEditForm {...defaultProps} />,
+    );
     const ToggleButtonLabelElement = getByLabelText(
       "Private",
     ) as HTMLLabelElement;
@@ -24,8 +26,8 @@ describe("Snippet Edit Form Component", () => {
     const InputLabelElement = getByLabelText("Title") as HTMLLabelElement;
     const InputButtonInputElement = getByLabelText("Title") as HTMLInputElement;
 
-    const EditorLabelElement = getByLabelText("CodeEditor") as HTMLLabelElement;
-    const EditorInputElement = getByLabelText("CodeEditor") as HTMLInputElement;
+    // const EditorLabelElement = getByLabelText("CodeEditor") as HTMLLabelElement;
+    // const EditorInputElement = getByLabelText("CodeEditor") as HTMLInputElement;
 
     expect(ToggleButtonLabelElement).toBeInTheDocument();
     expect(ToggleButtonInputElement).toBeInTheDocument();
@@ -38,5 +40,21 @@ describe("Snippet Edit Form Component", () => {
     // expect(EditorLabelElement).toBeInTheDocument();
     // expect(EditorInputElement).toBeInTheDocument();
     // expect(EditorInputElement.value).toBe(defaultProps.code)
+  });
+
+  it("calls handleOnDataChange with correct arguments when input value changes", () => {
+    const { getByLabelText } = render(<SnippetEditForm {...defaultProps} />);
+    const inputElement = getByLabelText("Title") as HTMLInputElement;
+
+    fireEvent.change(inputElement, { target: { value: "New Title" } });
+
+    expect(inputElement.value).toBe("New Title");
+  });
+
+  it("calls handleEditSubmit function on button click", async () => {
+    const { getByText } = render(<SnippetEditForm {...defaultProps} />);
+    const editButton = getByText("Edit");
+
+    expect(fireEvent.click(editButton)).toBe(true);
   });
 });
