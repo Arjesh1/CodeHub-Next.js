@@ -13,7 +13,7 @@ describe("Snippet Edit Form Component", () => {
   });
 
   it("checks the input value is correct", () => {
-    const { getByLabelText, getAllByRole } = render(
+    const { getByLabelText, getByText } = render(
       <SnippetEditForm {...defaultProps} />,
     );
     const ToggleButtonLabelElement = getByLabelText(
@@ -26,8 +26,7 @@ describe("Snippet Edit Form Component", () => {
     const InputLabelElement = getByLabelText("Title") as HTMLLabelElement;
     const InputButtonInputElement = getByLabelText("Title") as HTMLInputElement;
 
-    // const EditorLabelElement = getByLabelText("CodeEditor") as HTMLLabelElement;
-    // const EditorInputElement = getByLabelText("CodeEditor") as HTMLInputElement;
+    const EditorLabelElement = getByText("Code");
 
     expect(ToggleButtonLabelElement).toBeInTheDocument();
     expect(ToggleButtonInputElement).toBeInTheDocument();
@@ -37,9 +36,7 @@ describe("Snippet Edit Form Component", () => {
     expect(InputButtonInputElement).toBeInTheDocument();
     expect(InputButtonInputElement.value).toBe(defaultProps.title);
 
-    // expect(EditorLabelElement).toBeInTheDocument();
-    // expect(EditorInputElement).toBeInTheDocument();
-    // expect(EditorInputElement.value).toBe(defaultProps.code)
+    expect(EditorLabelElement).toBeInTheDocument();
   });
 
   it("calls handleOnDataChange with correct arguments when input value changes", () => {

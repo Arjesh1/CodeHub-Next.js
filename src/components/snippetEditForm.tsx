@@ -47,10 +47,7 @@ export function SnippetEditForm(snippet: Snippet) {
         />
 
         <div className="col-span-full">
-          <label
-            className="block text-sm font-medium leading-6 text-gray-900"
-            htmlFor="CodeEditor"
-          >
+          <label className="block text-sm font-medium leading-6 text-gray-900">
             Code
           </label>
           <Editor
